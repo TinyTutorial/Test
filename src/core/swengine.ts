@@ -16,7 +16,6 @@ class SWEngine{
     drawPoint(canvas: HTMLCanvasElement, x: number, y: number, color : string = "red"){
         const context = canvas.getContext("2d");
         if(context){
-            const w = canvas.clientWidth;
             const h = canvas.clientHeight;
             context.beginPath();
             context.arc(x, h - y, 1, 0, Math.PI * 2);
