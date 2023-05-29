@@ -1,5 +1,6 @@
 import { SwEngine } from "../../core/swengine";
 
+// 在 (100, 100) 处画点
 function draw(){
 
     const e = document.getElementById("Lesson0");

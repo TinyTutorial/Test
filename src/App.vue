@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import Lesson0 from "./components/Lesson0/index.vue";
+// import Lesson0 from "./components/Lesson0/index.vue";
+import Lesson1 from "./components/Lesson1/index.vue";
+
 </script>
 
 <template>
-  <Lesson0/>
+  <!-- <Lesson0/> -->
+  <Lesson1/>
 </template>
 
 <style scoped>
