@@ -23,7 +23,7 @@ function init(){
 
 async function loadObj(){
     return new Promise(async (resolve) => {
-        const response = await fetch("src/assets/african_head.obj");
+        const response = await fetch("/african_head.obj");
         const data = await response.text();
 
         let vertices: Vector3[] = [];
