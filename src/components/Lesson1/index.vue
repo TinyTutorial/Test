@@ -7,7 +7,7 @@
 </style>
 
 <script>
-import { drawLine } from "./index";
+import { init } from "./index";
 
 export default {
     name: 'Lesson1',
@@ -21,7 +21,7 @@ export default {
         
     },
     mounted() {
-        drawLine();
+        init();
     },
 };
 </script>
