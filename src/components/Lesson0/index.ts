@@ -1,4 +1,4 @@
-import { SwEngine } from "../../core/swengine";
+import { SwEngine, Vec2 } from "../../core/swengine";
 
 // 在 (100, 100) 处画点
 function draw(){
@@ -8,7 +8,7 @@ function draw(){
         const context = (e as any).getContext('2d');
         console.log(context)
         if(context){
-            SwEngine.drawPoint(context, 100, 100);
+            SwEngine.drawPoint(context, new Vec2(100, 100));
         }
     }
 

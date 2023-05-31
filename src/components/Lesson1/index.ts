@@ -1,5 +1,5 @@
 // @ts-ignore
-import { SwEngine } from "../../core/swengine";
+import { SwEngine, Vec2 } from "../../core/swengine";
 
 var canvas: HTMLCanvasElement;
 class Vector3{
@@ -53,9 +53,9 @@ function drawLine(){
 
     const canvas = document.getElementById("Lesson1") as HTMLCanvasElement;
     if(canvas){
-        SwEngine.drawLine(canvas, 13, 20, 80, 40, "white");
-        SwEngine.drawLine(canvas, 20, 13, 40, 80, "red");
-        SwEngine.drawLine(canvas, 80, 40, 13, 30, "blue");
+        SwEngine.drawLine(canvas, new Vec2(13, 20), new Vec2(80, 40), "white");
+        SwEngine.drawLine(canvas, new Vec2(20, 13), new Vec2(40, 80), "red");
+        SwEngine.drawLine(canvas, new Vec2(80, 40), new Vec2(13, 30), "blue");
     }
 
 }
@@ -76,7 +76,7 @@ function drawWireMesh(){
 
                     const x1 = (v[(j + 1) % 3].x + 1) * canvas.clientWidth / 2;
                     const y1 = (v[(j + 1) % 3].y + 1) * canvas.clientHeight / 2;
-                    SwEngine.drawLine(canvas, x0, y0, x1, y1, "white");
+                    SwEngine.drawLine(canvas, new Vec2(x0, y0), new Vec2(x1, y1), "white");
                 }
     
     

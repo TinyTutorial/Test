@@ -34,7 +34,7 @@ class SWEngine{
      * @param y1 
      * @param color 
      */
-    drawLine(canvas: HTMLCanvasElement, p0: Vec2, p1: Vec2, color : string = "red"){
+    drawLine(canvas: HTMLCanvasElement, p0: Vec2, p1: Vec2, color: string = "red"){
         let pt0 = p0.clone();
         let pt1 = p1.clone();
         function swap(a: number, b: number){
@@ -70,8 +70,12 @@ class SWEngine{
         }
     }
 
-    drawTriangle(canvasL: HTMLCanvasElement){
+    drawTriangle(canvas: HTMLCanvasElement, v0: Vec2, v1: Vec2, v2: Vec2, color: string = "red"){
         
+        this.drawLine(canvas, v0, v1, color);
+        this.drawLine(canvas, v1, v2, color);
+        this.drawLine(canvas, v2, v0, color);
+
     }
 
 }

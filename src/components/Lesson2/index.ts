@@ -5,11 +5,12 @@ var canvas: HTMLCanvasElement;
 
 function init(){
     canvas = document.getElementById("Lesson1") as HTMLCanvasElement;
+    
     // drawLine();
+    
     // drawWireMesh();
-    drawTriangle(new Vec2(10, 70),   new Vec2(50, 160),  new Vec2(70, 80),   "red");
-    drawTriangle(new Vec2(180, 50),  new Vec2(150, 1),   new Vec2(70, 180),  "white");
-    drawTriangle(new Vec2(180, 150), new Vec2(120, 160), new Vec2(130, 180), "green");
+    
+    drawTriangle();
 }
 
 async function loadObj(){
@@ -51,6 +52,7 @@ function drawLine(){
 
 }
 
+// @ts-expect-error
 function drawWireMesh(){
     
     if(canvas){
@@ -76,11 +78,12 @@ function drawWireMesh(){
     }
 }
 
-// @ts-expect-error
-function drawTriangle(v0: Vec2, v1: Vec2, v2: Vec2, color: string = "red"){
-    SwEngine.drawLine(canvas, v0, v1, color);
-    SwEngine.drawLine(canvas, v1, v2, color);
-    SwEngine.drawLine(canvas, v2, v0, color);
+function drawTriangle(){
+
+    SwEngine.drawTriangle(canvas, new Vec2(10, 70),   new Vec2(50, 160),  new Vec2(70, 80),   "red");
+    SwEngine.drawTriangle(canvas, new Vec2(180, 50),  new Vec2(150, 1),   new Vec2(70, 180),  "white");
+    SwEngine.drawTriangle(canvas, new Vec2(180, 150), new Vec2(120, 160), new Vec2(130, 180), "green");
+
 }
 
 
