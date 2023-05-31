@@ -71,8 +71,6 @@ function drawWireMesh(){
                     const y1 = (v[(j + 1) % 3].y + 1) * canvas.clientHeight / 2;
                     SwEngine.drawLine(canvas, new Vec2(x0, y0), new Vec2(x1, y1), "white");
                 }
-    
-    
             }
         });
     }
@@ -80,9 +78,9 @@ function drawWireMesh(){
 
 function drawTriangle(){
 
-    SwEngine.drawTriangle(canvas, new Vec2(10, 70),   new Vec2(50, 160),  new Vec2(70, 80),   "red");
-    SwEngine.drawTriangle(canvas, new Vec2(180, 50),  new Vec2(150, 1),   new Vec2(70, 180),  "white");
-    SwEngine.drawTriangle(canvas, new Vec2(180, 150), new Vec2(120, 160), new Vec2(130, 180), "green");
+    SwEngine.drawTriangle(canvas, new Vec2(10, 70),   new Vec2(50, 160),  new Vec2(70, 80),   "red",   true);
+    SwEngine.drawTriangle(canvas, new Vec2(180, 50),  new Vec2(150, 1),   new Vec2(70, 180),  "white", true);
+    SwEngine.drawTriangle(canvas, new Vec2(180, 150), new Vec2(120, 160), new Vec2(130, 180), "green", true);
 
 }
 

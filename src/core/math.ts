@@ -10,6 +10,20 @@ class Vec2{
 
     }
 
+    sub(v: Vec2){
+
+        this.x -= v.x;
+        this.y -= v.y;
+        return this;
+
+    }
+
+    cross(v: Vec2){
+
+        return this.x * v.y - this.y * v.x;
+
+    }
+
     clone(){
         return new Vec2(this.x, this.y);
     }
