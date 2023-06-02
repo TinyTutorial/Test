@@ -53,13 +53,12 @@ function drawLine(){
 }
 
 function Color(value: number){
-    const r = Math.floor(value * 255);
+    const r = Math.floor(Math.random() * 255);
     const g = Math.floor(value * 255);
     const b = Math.floor(value * 255);
     return 'rgba('+ r +','+ g +','+ b +',0.8)';
 }
 
-// @ts-expect-error
 function drawWireMesh(){
 
     const light: Vec3 = new Vec3(0, 0, -1);
@@ -98,15 +97,5 @@ function drawWireMesh(){
         });
     }
 }
-
-function drawTriangle(){
-
-    SwEngine.drawTriangle(canvas, new Vec2(10, 70),   new Vec2(50, 160),  new Vec2(70, 80),   "red",   true);
-    SwEngine.drawTriangle(canvas, new Vec2(180, 50),  new Vec2(150, 1),   new Vec2(70, 180),  "white", true);
-    SwEngine.drawTriangle(canvas, new Vec2(180, 150), new Vec2(120, 160), new Vec2(130, 180), "green", true);
-
-}
-
-
 
 export { init }
