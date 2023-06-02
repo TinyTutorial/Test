@@ -52,16 +52,17 @@ function drawLine(){
 
 }
 
-function Color(){
-    const r = Math.floor(Math.random()*255);
-    const g = Math.floor(Math.random()*255);
-    const b = Math.floor(Math.random()*255);
+function Color(value: number){
+    const r = Math.floor(value * 255);
+    const g = Math.floor(value * 255);
+    const b = Math.floor(value * 255);
     return 'rgba('+ r +','+ g +','+ b +',0.8)';
 }
 
 // @ts-expect-error
 function drawWireMesh(){
-    
+
+    const light: Vec3 = new Vec3(0, 0, -1);
     if(canvas){
         loadObj().then((data: any) => {
             const vertices = data[0];
@@ -70,24 +71,29 @@ function drawWireMesh(){
                 const face = faces[i];
                 const v: Vec3[] = [vertices[face.x - 1], vertices[face.y - 1], vertices[face.z - 1]];
                 
-                // for(let j = 0; j < 3; j++){
-                //     const x0 = (v[j].x + 1) * canvas.clientWidth / 2;
-                //     const y0 = (v[j].y + 1) * canvas.clientHeight / 2;
+                // 计算三角形的法向量
+                const v02 = v[2].clone().sub(v[0]);
+                const v01 = v[1].clone().sub(v[0]);
+                const n = v02.clone().cross(v01).normalize();
+                // 计算法向量在光线上的投影
+                let intensity = n.dot(light)
 
-                //     const x1 = (v[(j + 1) % 3].x + 1) * canvas.clientWidth / 2;
-                //     const y1 = (v[(j + 1) % 3].y + 1) * canvas.clientHeight / 2;
-                //     SwEngine.drawLine(canvas, new Vec2(x0, y0), new Vec2(x1, y1), Color());
-                // }
-                const v0 = new Vec2(
-                    (v[0].x + 1) * canvas.clientWidth / 2,
-                    (v[0].y + 1) * canvas.clientHeight / 2);
-                const v1 = new Vec2(
-                    (v[1].x + 1) * canvas.clientWidth / 2,
-                    (v[1].y + 1) * canvas.clientHeight / 2);
-                const v2 = new Vec2(
-                    (v[2].x + 1) * canvas.clientWidth / 2,
-                    (v[2].y + 1) * canvas.clientHeight / 2);
-                SwEngine.drawTriangle(canvas, v0, v1, v2, Color(), true);
+                if(intensity > 0){
+                    // NDC 归一化坐标
+                    const v0 = new Vec3(
+                        (v[0].x + 1) * canvas.clientWidth / 2,
+                        (v[0].y + 1) * canvas.clientHeight / 2,
+                        v[0].z);
+                    const v1 = new Vec3(
+                        (v[1].x + 1) * canvas.clientWidth / 2,
+                        (v[1].y + 1) * canvas.clientHeight / 2,
+                        v[1].z);
+                    const v2 = new Vec3(
+                        (v[2].x + 1) * canvas.clientWidth / 2,
+                        (v[2].y + 1) * canvas.clientHeight / 2,
+                        v[2].z);
+                    SwEngine.drawTriangle(canvas, v0, v1, v2, Color(intensity), true);
+                }
             }
         });
     }
