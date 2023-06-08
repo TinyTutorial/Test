@@ -78,7 +78,7 @@ class SWEngine{
         }
     }
 
-    drawTriangle(canvas: HTMLCanvasElement, A: Vec3, B: Vec3, C: Vec3, color: string = "red", fill: boolean = false){
+    drawTriangle(canvas: HTMLCanvasElement, A: Vec3, B: Vec3, C: Vec3, intensity: number, fill: boolean = false, texture: Uint8Array, uv0: Vec3, uv1: Vec3, uv2: Vec3){
         
         const v0: Vec2 = new Vec2(A.x, A.y);
         const v1: Vec2 = new Vec2(B.x, B.y);
@@ -156,20 +156,30 @@ class SWEngine{
                            bc_scree.z > 0 && bc_scree.z < 1){
                             // 插值求解三角形内部每个点的 z 值
                             p.z = -(bc_scree.x * A.z + bc_scree.y * B.z + bc_scree.z * C.z);
-                                      
+
                             const index = y * this.width + x;
                             if(p.z < this.zBuffer[index]){
                                 this.zBuffer[index] = p.z;
-                                this.drawPoint(canvas, new Vec2(p.x, p.y), color);
+                                // uv 插值,并从 texture 取出颜色值
+                                const uvX = bc_scree.x * uv0.x + bc_scree.y * uv1.x + bc_scree.z * uv2.x;
+                                const uvY = bc_scree.x * uv0.y + bc_scree.y * uv1.y + bc_scree.z * uv2.y;
+                                
+                                const i = Math.floor(uvY * 1024) * 1024 * 3 + Math.floor(uvX * 1024) * 3;
+                                const b = Math.floor(texture[i + 0] * intensity);
+                                const g = Math.floor(texture[i + 1] * intensity);
+                                const r = Math.floor(texture[i + 2] * intensity);
+
+                                const c = 'rgba('+ r +','+ g +','+ b +',1)';
+                                this.drawPoint(canvas, new Vec2(p.x, p.y), c);
                             }
                         }
                     }
                 }
             }
         }else{
-            this.drawLine(canvas, v0, v1, color);
-            this.drawLine(canvas, v1, v2, color);
-            this.drawLine(canvas, v2, v0, color);
+            this.drawLine(canvas, v0, v1);
+            this.drawLine(canvas, v1, v2);
+            this.drawLine(canvas, v2, v0);
         }
 
     }
